@@ -36,9 +36,6 @@ npm run build:web
 npm run e2e
 ```
 
-Mutation testing uses `mutmut`, which runs in Linux or WSL. The GitHub merge
-gate runs it on Ubuntu.
-
 ## Workshop Run-Of-Show
 
 This curriculum assumes 120 minutes.

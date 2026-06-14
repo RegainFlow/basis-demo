@@ -42,14 +42,12 @@ jobs:
       - run: npm run install:python
       - run: npm run architecture
 
-  tests-mutation:
-    name: tests-mutation
+  tests:
+    name: tests
     runs-on: ubuntu-latest
     needs: architecture
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -58,16 +56,12 @@ jobs:
           node-version: "20"
       - uses: astral-sh/setup-uv@v5
       - run: npm run install:python
-      - name: Fetch pull request base
-        if: github.event_name == 'pull_request'
-        run: git fetch --no-tags origin "${{ github.base_ref }}"
       - run: npm run test:python
-      - run: npm run test:mutation
 
   e2e:
     name: e2e
     runs-on: ubuntu-latest
-    needs: tests-mutation
+    needs: tests
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

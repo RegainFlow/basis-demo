@@ -30,7 +30,6 @@ Run the narrowest relevant check first, then the root gate before commit:
 - Python tests: `npm run test:python`
 - Web build: `npm run build:web`
 - E2E: `npm run e2e`
-- Mutation: `npm run test:mutation` in Linux or WSL
 
 ## Rules
 

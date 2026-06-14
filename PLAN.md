@@ -11,8 +11,7 @@ Important scope decisions:
 - Omit the reporting/automation area from this scaffold.
 - Teach Codex review as native GitHub code review integration outside CI, not as
   a `codex-action` workflow job.
-- CI uses four staged jobs: `format-static`, `architecture`, `tests-mutation`,
-  and `e2e`.
+- CI uses four staged jobs: `format-static`, `architecture`, `tests`, and `e2e`.
 
 ## Key Implementation Choices
 
@@ -48,10 +47,7 @@ Important scope decisions:
 - `architecture`: `lint-imports` checks Python layering for
   `api -> invoice_engine`; TypeScript web-to-engine boundaries are enforced by
   Semgrep.
-- `tests-mutation`: run all pytest tests, then mutmut. On `main`, mutate all
-  real `invoice_engine` code; on PRs, scope to changed invoice-engine files and
-  skip cleanly if none changed. Mutmut runner uses real behavior tests only, not
-  decorative weak tests.
+- `tests`: run all pytest tests for the Python packages.
 - `e2e`: run FastAPI and Vite, upload JSON, edit one row, submit, assert
   displayed total, and always save/upload a final screenshot artifact.
 - After each package implementation, run the relevant package checks before
@@ -64,12 +60,12 @@ Important scope decisions:
   `ROUND_HALF_EVEN`.
 - `test_weak.py` contains exactly three clearly commented decorative tests:
   assert-exists, assert-truthy, and mirrors-implementation. They pass under
-  pytest and are excluded from mutmut credit.
+  pytest but are intentionally weak.
 - API gets a minimal FastAPI TestClient test for `POST /invoices`.
 - Web gets TypeScript build coverage through npm scripts and integration
   coverage through Playwright.
-- Full final verification: root lint/static, architecture, pytest, mutmut, web
-  build, and e2e.
+- Full final verification: root lint/static, architecture, pytest, web build,
+  and e2e.
 
 ## Assumptions
 

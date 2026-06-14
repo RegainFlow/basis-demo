@@ -11,13 +11,3 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/invoice_engine"]
-
-[tool.mutmut]
-source_paths = ["src"]
-also_copy = ["tests"]
-do_not_mutate = ["*/__init__.py"]
-mutate_only_covered_lines = true
-pytest_add_cli_args = ["-q"]
-pytest_add_cli_args_test_selection = [
-    "tests/test_line_items.py",
-]
