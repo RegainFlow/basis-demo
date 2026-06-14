@@ -21,6 +21,7 @@ def test_post_invoices_returns_decimal_string_totals() -> None:
                     "quantity": "1",
                     "unit_price": "10.005",
                     "tax_rate": "0",
+                    "discount_rate": "0.50",
                 }
             ]
         },
@@ -28,10 +29,11 @@ def test_post_invoices_returns_decimal_string_totals() -> None:
 
     assert response.status_code == 200
     body = response.json()
-    assert body["subtotal"] == "10.00"
+    assert body["subtotal"] == "5.00"
     assert body["tax"] == "0.00"
-    assert body["total"] == "10.00"
+    assert body["total"] == "5.00"
     assert body["line_items"][0]["category"] == "Software"
+    assert body["line_items"][0]["discount_rate"] == "0.50"
 
 
 def test_rejects_json_number_money_fields() -> None:

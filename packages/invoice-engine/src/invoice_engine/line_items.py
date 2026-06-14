@@ -77,7 +77,7 @@ class InvoiceTotals(BaseModel):
 def calculate_line_item(item: LineItem) -> CalculatedLineItem:
     gross_subtotal = item.quantity * item.unit_price
     discounted_subtotal = gross_subtotal * (Decimal("1") - item.discount_rate)
-    subtotal = Decimal(str(round(float(discounted_subtotal), 2)))
+    subtotal = round_to_cents(discounted_subtotal)
     tax = round_to_cents(subtotal * item.tax_rate)
     total = subtotal + tax
 

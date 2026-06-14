@@ -56,6 +56,21 @@ def test_applies_line_item_discount_rate() -> None:
     assert result.total == Decimal("90.00")
 
 
+def test_discounted_subtotal_uses_bankers_rounding_without_float_conversion() -> None:
+    item = LineItem(
+        description="SaaS renewal discount",
+        quantity="1",
+        unit_price="20.01",
+        discount_rate="0.50",
+        tax_rate="0",
+    )
+
+    result = calculate_line_item(item)
+
+    assert result.subtotal == Decimal("10.00")
+    assert result.total == Decimal("10.00")
+
+
 @pytest.mark.parametrize(
     ("description", "category"),
     [
