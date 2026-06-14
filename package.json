@@ -1,0 +1,26 @@
+{
+  "name": "basis-demo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/web",
+    "e2e"
+  ],
+  "scripts": {
+    "architecture": "uv --cache-dir .uv-cache run --all-packages lint-imports --config importlinter.cfg",
+    "build": "npm run build:web",
+    "check": "npm run format:python && npm run lint:python && npm run semgrep && npm run architecture && npm run test:python && npm run build:web",
+    "install:python": "uv --cache-dir .uv-cache sync --all-packages --group dev",
+    "e2e": "npm --workspace e2e run test",
+    "format:python": "uv --cache-dir .uv-cache run ruff format --check .",
+    "lint:python": "uv --cache-dir .uv-cache run ruff check .",
+    "semgrep": "uv --cache-dir .uv-cache run python tools/ci/run_semgrep.py",
+    "test:python": "uv --cache-dir .uv-cache run --all-packages pytest",
+    "dev:api": "uv --cache-dir .uv-cache run uvicorn api.main:app --app-dir packages/api/src --host 127.0.0.1 --port 8000",
+    "dev:web": "npm --workspace packages/web run dev -- --host 127.0.0.1",
+    "build:web": "npm --workspace packages/web run build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

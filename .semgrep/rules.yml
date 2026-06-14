@@ -1,0 +1,28 @@
+rules:
+  - id: basis.web-no-direct-invoice-engine-import
+    message: Web code must call the API package boundary, not invoice_engine directly.
+    severity: ERROR
+    languages: [javascript, typescript]
+    paths:
+      include:
+        - packages/web/src/**
+    patterns:
+      - pattern-either:
+          - pattern: import $X from "$MODULE"
+          - pattern: import { $X } from "$MODULE"
+          - pattern: import "$MODULE"
+      - metavariable-regex:
+          metavariable: $MODULE
+          regex: .*invoice[-_]engine.*
+
+  - id: basis.no-dynamic-eval-exec
+    message: Do not execute dynamic code in this demo repository.
+    severity: ERROR
+    languages: [python, javascript, typescript]
+    paths:
+      exclude:
+        - node_modules/**
+        - .venv/**
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: exec(...)
