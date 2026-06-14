@@ -31,6 +31,7 @@ select = ["B", "E", "F", "I", "UP"]
 
 [tool.mutmut]
 source_paths = ["packages/invoice-engine/src/invoice_engine"]
+also_copy = ["packages/invoice-engine/tests"]
 do_not_mutate = ["*/__init__.py"]
 mutate_only_covered_lines = true
 pytest_add_cli_args = ["-q"]
