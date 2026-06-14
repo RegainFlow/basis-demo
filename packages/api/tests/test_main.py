@@ -1,3 +1,4 @@
+import pytest
 from api.main import app
 from fastapi.testclient import TestClient
 
@@ -34,7 +35,8 @@ def test_post_invoices_returns_decimal_string_totals() -> None:
     assert body["line_items"][0]["category"] == "Software"
 
 
-def test_rejects_json_number_money_fields() -> None:
+@pytest.mark.parametrize("unit_price", [4.25, 4])
+def test_rejects_json_number_money_fields(unit_price: float | int) -> None:
     response = client.post(
         "/invoices",
         json={
@@ -42,7 +44,7 @@ def test_rejects_json_number_money_fields() -> None:
                 {
                     "description": "Coffee meeting",
                     "quantity": "1",
-                    "unit_price": 4.25,
+                    "unit_price": unit_price,
                     "tax_rate": "0",
                 }
             ]

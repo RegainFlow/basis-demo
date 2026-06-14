@@ -8,8 +8,10 @@ from invoice_engine.rounding import round_to_cents
 
 
 def _parse_decimal(value: Any) -> Decimal:
-    if isinstance(value, float):
-        raise ValueError("Use decimal strings, not floats, for invoice arithmetic.")
+    if isinstance(value, int | float):
+        raise ValueError(
+            "Use decimal strings, not JSON numbers, for invoice arithmetic."
+        )
     if isinstance(value, Decimal):
         return value
     try:

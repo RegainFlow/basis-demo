@@ -53,9 +53,10 @@ def test_categorizes_expenses_from_description(description: str, category: str) 
     assert categorize_expense(description) == category
 
 
-def test_rejects_float_inputs_for_money_math() -> None:
+@pytest.mark.parametrize("value", [4.25, 4])
+def test_rejects_json_number_inputs_for_money_math(value: float | int) -> None:
     with pytest.raises(ValidationError, match="decimal strings"):
-        LineItem(description="Coffee meeting", quantity="1", unit_price=4.25)
+        LineItem(description="Coffee meeting", quantity="1", unit_price=value)
 
 
 def test_rejects_empty_invoice() -> None:
