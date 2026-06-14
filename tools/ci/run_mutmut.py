@@ -6,12 +6,18 @@ import subprocess
 import sys
 from pathlib import Path
 
-ENGINE_SRC = Path("packages/invoice-engine/src/invoice_engine")
-PYPROJECT = Path("pyproject.toml")
+ENGINE_PACKAGE = Path("packages/invoice-engine")
+ENGINE_SRC = ENGINE_PACKAGE / "src" / "invoice_engine"
+PYPROJECT = ENGINE_PACKAGE / "pyproject.toml"
 
 
-def run(command: list[str], *, check: bool = True) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(command, check=check, text=True)
+def run(
+    command: list[str],
+    *,
+    check: bool = True,
+    cwd: Path | None = None,
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(command, check=check, cwd=cwd, text=True)
 
 
 def changed_engine_files() -> list[str]:
@@ -28,7 +34,7 @@ def changed_engine_files() -> list[str]:
         "--name-only",
         f"origin/{base_ref}...HEAD",
         "--",
-        str(ENGINE_SRC),
+        ENGINE_SRC.as_posix(),
     ]
     diff = subprocess.run(
         diff_command,
@@ -36,11 +42,13 @@ def changed_engine_files() -> list[str]:
         capture_output=True,
         text=True,
     )
-    return [
-        line.strip().replace("\\", "/")
-        for line in diff.stdout.splitlines()
-        if line.strip().endswith(".py")
-    ]
+    changed_files = []
+    for line in diff.stdout.splitlines():
+        path = Path(line.strip().replace("\\", "/"))
+        if path.suffix != ".py":
+            continue
+        changed_files.append(path.relative_to(ENGINE_PACKAGE).as_posix())
+    return changed_files
 
 
 def with_only_mutate(paths: list[str]) -> str:
@@ -54,8 +62,8 @@ def with_only_mutate(paths: list[str]) -> str:
 
 
 def assert_clean_mutation_stats() -> None:
-    run(["mutmut", "export-cicd-stats"])
-    stats_path = Path("mutants/mutmut-cicd-stats.json")
+    run(["mutmut", "export-cicd-stats"], cwd=ENGINE_PACKAGE)
+    stats_path = ENGINE_PACKAGE / "mutants/mutmut-cicd-stats.json"
     stats = json.loads(stats_path.read_text(encoding="utf-8"))
     failing = {
         key: stats[key]
@@ -64,7 +72,7 @@ def assert_clean_mutation_stats() -> None:
     }
     if failing:
         print(f"Mutation gate failed: {failing}", file=sys.stderr)
-        run(["mutmut", "results"])
+        run(["mutmut", "results"], cwd=ENGINE_PACKAGE)
         raise SystemExit(1)
 
 
@@ -83,7 +91,7 @@ def main() -> None:
         PYPROJECT.write_text(with_only_mutate(changed_files), encoding="utf-8")
 
     try:
-        run(["mutmut", "run"])
+        run(["mutmut", "run"], cwd=ENGINE_PACKAGE)
         assert_clean_mutation_stats()
     finally:
         PYPROJECT.write_text(original_pyproject, encoding="utf-8")
