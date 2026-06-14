@@ -25,6 +25,11 @@ class LineItem(BaseModel):
     quantity: Decimal = Field(gt=Decimal("0"))
     unit_price: Decimal = Field(ge=Decimal("0"))
     tax_rate: Decimal = Field(default=Decimal("0"), ge=Decimal("0"), le=Decimal("1"))
+    discount_rate: Decimal = Field(
+        default=Decimal("0"),
+        ge=Decimal("0"),
+        le=Decimal("1"),
+    )
 
     @field_validator("description", mode="before")
     @classmethod
@@ -34,7 +39,13 @@ class LineItem(BaseModel):
             raise ValueError("description is required")
         return description
 
-    @field_validator("quantity", "unit_price", "tax_rate", mode="before")
+    @field_validator(
+        "quantity",
+        "unit_price",
+        "tax_rate",
+        "discount_rate",
+        mode="before",
+    )
     @classmethod
     def _parse_decimal_fields(cls, value: Any) -> Decimal:
         return _parse_decimal(value)
@@ -48,6 +59,7 @@ class CalculatedLineItem(BaseModel):
     quantity: Decimal
     unit_price: Decimal
     tax_rate: Decimal
+    discount_rate: Decimal
     subtotal: Decimal
     tax: Decimal
     total: Decimal
@@ -63,7 +75,9 @@ class InvoiceTotals(BaseModel):
 
 
 def calculate_line_item(item: LineItem) -> CalculatedLineItem:
-    subtotal = round_to_cents(item.quantity * item.unit_price)
+    gross_subtotal = item.quantity * item.unit_price
+    discounted_subtotal = gross_subtotal * (Decimal("1") - item.discount_rate)
+    subtotal = Decimal(str(round(float(discounted_subtotal), 2)))
     tax = round_to_cents(subtotal * item.tax_rate)
     total = subtotal + tax
 
@@ -73,6 +87,7 @@ def calculate_line_item(item: LineItem) -> CalculatedLineItem:
         quantity=item.quantity,
         unit_price=item.unit_price,
         tax_rate=item.tax_rate,
+        discount_rate=item.discount_rate,
         subtotal=subtotal,
         tax=tax,
         total=total,

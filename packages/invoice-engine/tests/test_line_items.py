@@ -40,6 +40,22 @@ def test_invoice_totals_round_each_line_before_summing() -> None:
     assert [line.category for line in result.line_items] == ["Software", "Meals"]
 
 
+def test_applies_line_item_discount_rate() -> None:
+    item = LineItem(
+        description="SaaS renewal discount",
+        quantity="2",
+        unit_price="50.00",
+        discount_rate="0.10",
+        tax_rate="0",
+    )
+
+    result = calculate_line_item(item)
+
+    assert result.discount_rate == Decimal("0.10")
+    assert result.subtotal == Decimal("90.00")
+    assert result.total == Decimal("90.00")
+
+
 @pytest.mark.parametrize(
     ("description", "category"),
     [
