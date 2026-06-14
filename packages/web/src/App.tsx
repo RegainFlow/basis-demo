@@ -56,6 +56,9 @@ export default function App() {
         item.id === id ? { ...item, [field]: value } : item,
       ),
     );
+    setTotals(null);
+    setStatus("Ready");
+    setError(null);
   }
 
   function addLine() {

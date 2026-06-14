@@ -20,3 +20,17 @@ test("upload, edit, and calculate an invoice total", async ({ page }, testInfo) 
     fullPage: true,
   });
 });
+
+test("clears calculated totals when a line item changes", async ({ page }) => {
+  await page.goto("/");
+
+  await page.getByTestId("calculate-invoice").click();
+  await expect(page.getByTestId("invoice-total")).toContainText("$163.38");
+  await expect(page.getByText("Calculated")).toBeVisible();
+
+  await page.getByLabel("Line 1 quantity").fill("3");
+
+  await expect(page.getByTestId("invoice-total")).toContainText("$--");
+  await expect(page.getByText("Ready")).toBeVisible();
+  await expect(page.getByText("Calculated")).not.toBeVisible();
+});
