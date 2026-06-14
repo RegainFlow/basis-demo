@@ -1,0 +1,39 @@
+[project]
+name = "basis-demo"
+version = "0.1.0"
+description = "Teaching monorepo for accounting AI Codex workshops."
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28",
+    "import-linter>=2.1",
+    "mutmut>=3.2",
+    "pytest>=8.3",
+    "ruff>=0.8",
+    "semgrep>=1.100",
+]
+
+[tool.uv.workspace]
+members = ["packages/invoice-engine", "packages/api"]
+
+[tool.pytest.ini_options]
+testpaths = ["packages/invoice-engine/tests", "packages/api/tests"]
+pythonpath = ["packages/invoice-engine/src", "packages/api/src"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "UP"]
+
+[tool.mutmut]
+source_paths = ["packages/invoice-engine/src/invoice_engine"]
+do_not_mutate = ["*/__init__.py"]
+mutate_only_covered_lines = true
+pytest_add_cli_args = ["-q"]
+pytest_add_cli_args_test_selection = [
+    "packages/invoice-engine/tests/test_line_items.py",
+]

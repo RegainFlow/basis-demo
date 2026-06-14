@@ -1,0 +1,24 @@
+rules:
+  - id: org.web-no-direct-domain-import
+    message: Web code must call the API boundary, not domain code directly.
+    severity: ERROR
+    languages: [javascript, typescript]
+    paths:
+      include:
+        - packages/web/src/**
+    patterns:
+      - pattern-either:
+          - pattern: import $X from "$MODULE"
+          - pattern: import { $X } from "$MODULE"
+          - pattern: import "$MODULE"
+      - metavariable-regex:
+          metavariable: $MODULE
+          regex: .*domain.*
+
+  - id: org.no-dynamic-eval-exec
+    message: Do not execute dynamic code in application paths.
+    severity: ERROR
+    languages: [python, javascript, typescript]
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: exec(...)
