@@ -8,6 +8,8 @@ Expected outcome:
   tested.
 - The suite still covers rounding ties, per-line total behavior, categorization,
   float rejection, and empty invoices.
+- `exercises/02/artifacts/` mirrors the testing policy and write-tests skill
+  added by this lesson.
 
 Verification:
 
