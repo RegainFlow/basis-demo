@@ -1,7 +1,7 @@
 import { Calculator, FileUp, Plus, RotateCcw, Trash2 } from "lucide-react";
 import { ChangeEvent, useMemo, useRef, useState } from "react";
 
-import { calculateInvoice } from "./invoice_engine";
+import { calculateInvoice } from "./api";
 import { sampleInvoice } from "./sampleInvoice";
 import type { DraftLineItem, InvoiceRequest, InvoiceTotals } from "./types";
 
