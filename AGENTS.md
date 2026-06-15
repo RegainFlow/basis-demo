@@ -24,12 +24,15 @@ Run the narrowest relevant check first, then the root gate before commit:
 
 - Python format: `npm run format:python`
 - Python lint: `npm run lint:python`
+- Semgrep: `npm run semgrep`
 - Python tests: `npm run test:python`
 - Web build: `npm run build:web`
 - E2E: `npm run e2e`
 
 ## Rules
 
+- Follow `.agents/docs/architecture.md`: web calls API; API imports engine;
+  engine imports neither API nor web.
 - Follow `.agents/docs/currency.md`: use `Decimal`, `ROUND_HALF_EVEN`, and cent
   quantization for money. Never use float for invoice arithmetic.
 - Follow `.agents/docs/testing.md`: tests express intent. Write the failing test
