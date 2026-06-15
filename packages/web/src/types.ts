@@ -27,6 +27,7 @@ export interface InvoiceRequest {
 }
 
 export interface InvoiceTotals {
+  invoice_id: number;
   line_items: CalculatedLineItem[];
   subtotal: string;
   tax: string;

@@ -9,6 +9,7 @@ __pycache__/
 node_modules/
 packages/web/dist/
 packages/web/tsconfig.tsbuildinfo
+packages/api/.data/
 e2e/test-results/
 e2e/playwright-report/
 

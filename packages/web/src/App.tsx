@@ -1,10 +1,4 @@
-import {
-  Calculator,
-  FileUp,
-  Plus,
-  RotateCcw,
-  Trash2,
-} from "lucide-react";
+import { Calculator, FileUp, Plus, RotateCcw, Trash2 } from "lucide-react";
 import { ChangeEvent, useMemo, useRef, useState } from "react";
 
 import { calculateInvoice } from "./api";
@@ -36,7 +30,7 @@ function toRequest(lineItems: DraftLineItem[]): InvoiceRequest {
 
 export default function App() {
   const [lineItems, setLineItems] = useState<DraftLineItem[]>(
-    withIds(sampleInvoice),
+    withIds(sampleInvoice)
   );
   const [totals, setTotals] = useState<InvoiceTotals | null>(null);
   const [status, setStatus] = useState("Ready");
@@ -49,12 +43,12 @@ export default function App() {
   function updateLine(
     id: string,
     field: keyof Omit<DraftLineItem, "id">,
-    value: string,
+    value: string
   ) {
     setLineItems((current) =>
       current.map((item) =>
-        item.id === id ? { ...item, [field]: value } : item,
-      ),
+        item.id === id ? { ...item, [field]: value } : item
+      )
     );
   }
 
@@ -65,7 +59,7 @@ export default function App() {
 
   function removeLine(id: string) {
     setLineItems((current) =>
-      current.length === 1 ? current : current.filter((item) => item.id !== id),
+      current.length === 1 ? current : current.filter((item) => item.id !== id)
     );
     setTotals(null);
   }
@@ -106,7 +100,7 @@ export default function App() {
     try {
       const response = await calculateInvoice(requestPayload);
       setTotals(response);
-      setStatus("Calculated");
+      setStatus(`Calculated #${response.invoice_id}`);
     } catch (caught) {
       const message =
         caught instanceof Error ? caught.message : "Invoice calculation failed";
