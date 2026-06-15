@@ -19,7 +19,7 @@ app.add_middleware(
 
 
 class InvoiceRequest(BaseModel):
-    line_items: list[LineItem] = Field(min_length=1)
+    line_items: list[LineItem] = Field(min_length=0)
 
 
 @app.get("/healthz")

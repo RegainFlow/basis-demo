@@ -146,6 +146,7 @@ export default function App() {
           <button
             type="button"
             className="primary-button"
+            disabled={lineItems.length > 0}
             onClick={submitInvoice}
             data-testid="calculate-invoice"
           >
