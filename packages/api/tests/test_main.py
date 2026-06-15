@@ -22,7 +22,7 @@ def test_post_invoices_returns_decimal_string_totals() -> None:
                 {
                     "description": "SaaS platform license",
                     "quantity": "1",
-                    "unit_price": "10.005",
+                    "unit_price": "10.00",
                     "tax_rate": "0",
                 }
             ]

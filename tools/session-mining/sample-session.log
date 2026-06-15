@@ -1,8 +1,0 @@
-[09:12] engineer: Changed invoice rounding to use Python round() because it is shorter.
-[09:13] reviewer: Please use Decimal quantized to cents with ROUND_HALF_EVEN. Do not use float or Python round for money.
-[09:25] engineer: API now converts unit_price to float before calling the engine.
-[09:26] reviewer: Same correction: keep unit_price as a decimal string and parse to Decimal in the domain layer.
-[09:41] engineer: Web calculates the total locally with Number() so the UI feels faster.
-[09:42] reviewer: Repeated correction: web must call the API and render the Decimal-backed result. No float invoice totals in web code.
-[09:55] engineer: Added a test that compares the result to round(quantity * price, 2).
-[09:56] reviewer: That mirrors the bug. Write an exact expected-cent test for a HALF_EVEN tie such as 10.005 -> 10.00.

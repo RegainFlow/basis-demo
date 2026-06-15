@@ -1,10 +1,11 @@
-# Exercise 01: Write A Currency Review Skill
+# Exercise 01: Catch The Currency Bug
 
-Create a skill that reviews money math changes. It should trigger on invoice
-engine diffs, inspect rounding policy, and output findings first.
+Start from `demo-0/bad-state`. Find why the invoice tests are green even though
+line subtotal rounding is wrong.
 
 Acceptance:
 
-- Mentions Decimal and `ROUND_HALF_EVEN`.
-- Requires exact expected-cent tests.
-- Separates findings from summary.
+- Identify the float or Python rounding path.
+- Add one exact-cent behavior test that fails before the fix.
+- Fix the implementation with `Decimal`, cent quantization, and
+  `ROUND_HALF_EVEN`.

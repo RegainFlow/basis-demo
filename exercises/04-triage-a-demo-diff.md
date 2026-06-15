@@ -1,7 +1,7 @@
 # Exercise 04: Triage A Demo Diff
 
-Given a branch diff, classify it as Own, Review, or Delegate using
-`.agents/skills/risk-tier-triage/SKILL.md`.
+Start from `demo-5/ui-fixed`. Classify a proposed diff as Own, Review, or
+Delegate using the risk axes: blast radius, reversibility, and verifiability.
 
 Acceptance:
 

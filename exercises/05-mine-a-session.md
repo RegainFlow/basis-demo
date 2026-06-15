@@ -1,11 +1,10 @@
 # Exercise 05: Mine A Session
 
-Use `tools/session-mining/sample-session.log` and `mine.md` to decide whether
-the repeated float-to-Decimal correction deserves a skill, AGENTS rule, template,
-or CI rule.
+Start from `demo-6/risk-tier`. Use the prepared session log added in the
+flywheel lesson to identify repeated human corrections.
 
 Acceptance:
 
 - Identifies the repeated correction.
-- Chooses a durable surface.
+- Chooses whether it belongs in an AGENTS rule, skill, template, or CI rule.
 - Drafts the exact artifact update.
