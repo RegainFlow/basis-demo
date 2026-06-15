@@ -32,6 +32,8 @@ Run the narrowest relevant check first, then the root gate before commit:
 
 - Follow `.agents/docs/currency.md`: use `Decimal`, `ROUND_HALF_EVEN`, and cent
   quantization for money. Never use float for invoice arithmetic.
+- Follow `.agents/docs/testing.md`: tests express intent. Write the failing test
+  first when fixing behavior.
 - Keep one concern per PR. Aim for diffs a reviewer can understand within about
   400 changed lines.
 - Use synthetic data only.
