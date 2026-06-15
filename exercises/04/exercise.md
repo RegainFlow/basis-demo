@@ -2,9 +2,3 @@
 
 Start from `demo-5/ui-fixed`. Classify a proposed diff as Own, Review, or
 Delegate using the risk axes: blast radius, reversibility, and verifiability.
-
-Tasks:
-
-- Name the changed surfaces.
-- Give one tier with reasoning.
-- List required checks before merge.

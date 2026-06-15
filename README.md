@@ -33,17 +33,17 @@ Then open `http://127.0.0.1:5173`.
 
 ## Demo Branches
 
-| Branch                     | State                                                        |
-| -------------------------- | ------------------------------------------------------------ |
-| `demo-0/bad-state`         | All planted defects, weak tests, no durable guardrails       |
-| `demo-1/currency-fixed`    | Currency bug fixed with exact-cent behavior coverage         |
-| `demo-2/tests-fixed`       | Decorative tests replaced with behavior tests                |
-| `demo-3/architecture-fixed`| Web/API boundary policy added and violation repaired         |
-| `demo-4/semgrep-rule`      | Human float-to-Decimal feedback encoded as a deterministic rule |
-| `demo-5/ui-fixed`          | Browser-verified total dollar-sign styling repaired          |
-| `demo-6/risk-tier`         | Risk-tier triage skill added                                 |
-| `demo-7/flywheel`          | Session mining added as the improvement intake path          |
-| `main`                     | Clean final reference state                                  |
+| Branch                      | State                                                           |
+| --------------------------- | --------------------------------------------------------------- |
+| `demo-0/bad-state`          | All planted defects, weak tests, no durable guardrails          |
+| `demo-1/currency-fixed`     | AGENTS scaffold added; currency bug fixed with behavior coverage |
+| `demo-2/tests-fixed`        | Decorative tests replaced with behavior tests                   |
+| `demo-3/architecture-fixed` | Web/API boundary policy added and violation repaired            |
+| `demo-4/semgrep-rule`       | Human float-to-Decimal feedback encoded as a deterministic rule |
+| `demo-5/ui-fixed`           | Browser-verified total dollar-sign styling repaired             |
+| `demo-6/risk-tier`          | Risk-tier triage skill added                                    |
+| `demo-7/flywheel`           | Session mining added as the improvement intake path             |
+| `main`                      | Clean final reference state                                     |
 
 ## Repo Map
 
