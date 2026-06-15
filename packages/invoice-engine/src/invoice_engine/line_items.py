@@ -63,7 +63,7 @@ class InvoiceTotals(BaseModel):
 
 
 def calculate_line_item(item: LineItem) -> CalculatedLineItem:
-    subtotal = Decimal(str(round(float(item.quantity * item.unit_price), 2)))
+    subtotal = round_to_cents(item.quantity * item.unit_price)
     tax = round_to_cents(subtotal * item.tax_rate)
     total = subtotal + tax
 
