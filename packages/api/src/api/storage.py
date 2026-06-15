@@ -50,7 +50,7 @@ def save_invoice_submission(
             (
                 datetime.now(UTC).isoformat(),
                 json.dumps(request_payload, sort_keys=True),
-                json.dumps(totals_payload, sort_keys=True),
+                json.dumps(request_payload, sort_keys=True),
             ),
         )
         return int(cursor.lastrowid)
