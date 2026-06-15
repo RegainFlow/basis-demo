@@ -7,6 +7,8 @@ Expected outcome:
   `packages/web/AGENTS.md` describe local package rules.
 - `.agents/docs/currency.md` and `.agents/skills/review-currency-math/SKILL.md`
   exist before the currency fix.
+- `exercises/01/artifacts/` mirrors the AGENTS and currency files added by this
+  lesson.
 - The bug is the conversion of invoice arithmetic through `float()` and Python
   `round()`.
 - A meaningful test asserts banker’s rounding for an exact cent tie, such as
