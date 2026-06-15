@@ -2,7 +2,7 @@ name: Merge Gate
 
 on:
   push:
-    branches: [main, demo-6, demo-7]
+    branches: [main, "demo-6/**", "demo-7/**"]
   pull_request:
 
 permissions:
