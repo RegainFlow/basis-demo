@@ -7,6 +7,8 @@ Expected outcome:
 - `packages/web/src/invoice_engine.ts` is removed.
 - The architecture policy says web submits invoice payloads over HTTP to the
   API, and the API calls `invoice_engine`.
+- `exercises/03/artifacts/` mirrors the architecture policy and Semgrep rule
+  added by this lesson.
 
 Verification:
 
