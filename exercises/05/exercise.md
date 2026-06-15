@@ -1,4 +1,4 @@
-# Exercise 05: Mine A Session
+# Exercise 05: Verify The UI In A Browser
 
-Start from `demo-6/risk-tier`. Use the session-mining workflow added in the
-flywheel lesson to mine your local Codex logs for repeated human corrections.
+Start from `demo-4/semgrep-rule`. Use browser verification to catch and fix the
+total dollar-sign color regression.

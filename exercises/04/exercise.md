@@ -1,4 +1,4 @@
-# Exercise 04: Triage A Demo Diff
+# Exercise 04: Encode Human Feedback
 
-Start from `demo-5/ui-fixed`. Classify a proposed diff as Own, Review, or
-Delegate using the risk axes: blast radius, reversibility, and verifiability.
+Start from `demo-3/architecture-fixed`. Turn the repeated human feedback
+"never use float for currency" into a deterministic rule.
