@@ -40,6 +40,21 @@ def test_invoice_totals_round_each_line_before_summing() -> None:
     assert [line.category for line in result.line_items] == ["Software", "Meals"]
 
 
+def test_line_total_uses_rounded_subtotal_and_tax() -> None:
+    item = LineItem(
+        description="Audit support retainer",
+        quantity="2",
+        unit_price="75.005",
+        tax_rate="0.0825",
+    )
+
+    result = calculate_line_item(item)
+
+    assert result.subtotal == Decimal("150.01")
+    assert result.tax == Decimal("12.38")
+    assert result.total == Decimal("162.39")
+
+
 @pytest.mark.parametrize(
     ("description", "category"),
     [
