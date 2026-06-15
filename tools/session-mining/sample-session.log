@@ -1,6 +1,0 @@
-[09:12] engineer: Changed invoice rounding to use Python round() because it is shorter.
-[09:13] reviewer: Please use Decimal quantized to cents with ROUND_HALF_EVEN. Do not use float or Python round for money.
-[09:25] engineer: API now converts unit_price to float before calling the engine.
-[09:26] reviewer: Same correction: JSON money stays as decimal strings and engine math stays Decimal-backed.
-[09:41] engineer: Web now estimates invoice totals locally so the UI feels instant.
-[09:42] reviewer: Repeated correction: web must call the API and render the Decimal-backed result. No float invoice totals in web code.

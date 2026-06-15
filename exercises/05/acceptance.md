@@ -2,8 +2,11 @@
 
 Expected outcome:
 
-- The repeated correction is that invoice money must stay Decimal-backed and
-  web code must not compute invoice totals locally.
+- No raw or fake session log is committed to the repository.
+- `tools/session-mining/mine_codex_logs.py` reads local Codex history from
+  `~/.codex/history.jsonl` by default.
+- The output identifies repeated correction-like prompts from the presenter's
+  actual logs.
 - Mechanical invariants should become Semgrep or CI rules.
 - Repeated review workflows should become skills.
 - Broad repo conventions should become AGENTS guidance or policy prose.
@@ -12,5 +15,6 @@ Expected outcome:
 Verification:
 
 ```bash
+python tools/session-mining/mine_codex_logs.py
 npm run check
 ```
