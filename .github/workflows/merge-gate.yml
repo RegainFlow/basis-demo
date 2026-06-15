@@ -2,7 +2,7 @@ name: Merge Gate
 
 on:
   push:
-    branches: [main]
+    branches: [main, lr-codex-currency-review]
   pull_request:
 
 permissions:
