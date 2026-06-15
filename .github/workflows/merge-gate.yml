@@ -2,7 +2,7 @@ name: Merge Gate
 
 on:
   push:
-    branches: [main]
+    branches: [main, lr-arch-semgrep]
   pull_request:
 
 permissions:
