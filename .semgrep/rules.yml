@@ -14,3 +14,21 @@ rules:
       - metavariable-regex:
           metavariable: $MODULE
           regex: .*invoice[-_]engine.*
+
+  - id: basis.invoice-engine-no-float-conversion
+    message: Money math must stay in Decimal; do not convert invoice values with float().
+    severity: ERROR
+    languages: [python]
+    paths:
+      include:
+        - packages/invoice-engine/src/**
+    pattern: float(...)
+
+  - id: basis.invoice-engine-no-python-round
+    message: Money math must use Decimal.quantize with ROUND_HALF_EVEN, not Python round().
+    severity: ERROR
+    languages: [python]
+    paths:
+      include:
+        - packages/invoice-engine/src/**
+    pattern: round(...)
