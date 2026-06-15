@@ -1,7 +1,7 @@
 # Exercise 05: Mine A Session
 
-Start from `demo-6/risk-tier`. Use the prepared session log added in the
-flywheel lesson to identify repeated human corrections.
+Start from `demo-6/risk-tier`. Use the session-mining workflow added in the
+flywheel lesson to mine your local Codex logs for repeated human corrections.
 
 Tasks:
 
